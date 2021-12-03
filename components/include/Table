@@ -1,0 +1,30 @@
+#ifndef __TABLE_MODEL__
+
+#define __TABLE_MODEL__
+
+
+#include "Column"
+
+
+#include <vector>
+
+
+class Table
+{
+    public:
+
+	Table();
+	Table(std::string);
+	void addColumn(Column*);
+	std::string log() const;
+	
+
+    private:
+
+	std::string name;
+	std::vector<Column> columns;
+
+};
+
+
+#endif

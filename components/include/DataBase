@@ -1,0 +1,36 @@
+#ifndef __DB_H__
+
+#define __DB_H__
+
+#include "Table"
+
+#include <string>
+#include <vector>
+
+class DataBase
+{
+
+	public:
+
+		bool setUsername(std::string);
+		bool setPassword(std::string);
+		bool setAccessPoint(std::string);
+
+		std::string getUsername() const;
+		std::string getPassword() const;
+		std::string getAccessPoint() const;
+
+		void addTable(Table*);
+
+		std::string log() const;
+
+	private:
+
+		std::string username;
+		std::string password;
+		std::string access_point;
+		std::vector<Table> tables;
+
+};
+
+#endif

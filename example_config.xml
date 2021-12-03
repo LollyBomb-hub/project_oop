@@ -1,0 +1,19 @@
+<Database username="db_username" password="db_password" accesspoint="localhost:1234">
+
+    <Table name="lessons">
+
+        <Column name="c_name" type="Text">
+            A12:A26
+        </Column>
+
+        <Column name="c_surname" type="Text">
+            B12:B26
+        </Column>
+
+        <Column name="c_lastname" type="Text">
+            C12:C26
+        </Column>
+
+    </Table>
+
+</Database>

@@ -1,0 +1,42 @@
+#ifndef __COLUMN_H__
+
+#define __COLUMN_H__
+
+
+#include <string>
+#include <vector>
+
+
+class Column
+{
+
+	public:
+
+		// Header arg constructor
+		Column(std::string);
+		// Header and type args constructor
+		Column(std::string, std::string);
+		// Header, type and source constructor
+		Column(std::string, std::string, std::string);
+		// All args constructor
+		Column(std::string, std::string, std::vector<std::string>);
+
+		// Get element by rowNo
+		std::string& operator[](size_t);
+
+		std::string getHeader() const;
+
+		// Get length of data
+		size_t length() const;
+
+	private:
+
+		std::string header;
+		std::string type;
+		std::string source;
+		std::vector<std::string> values;
+
+};
+
+
+#endif
