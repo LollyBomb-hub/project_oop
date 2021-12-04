@@ -34,9 +34,21 @@ Column::Column(std::string _header, std::string _type, std::vector<std::string> 
 
 }
 
+std::string* Column::operator[](size_t idV)
+{
+	if(idV < this->values.size())
+		return new std::string(this->values[idV]);
+	return NULL;
+}
+
 std::string Column::getHeader() const
 {
 	return this->header;
+}
+
+std::string Column::getType() const
+{
+	return this->type;
 }
 
 std::string Column::getCreatingString() const

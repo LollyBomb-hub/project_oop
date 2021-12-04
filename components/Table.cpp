@@ -76,3 +76,57 @@ std::string Table::getCreatingString() const
 	creatingString += ");";
 	return creatingString;
 }
+
+
+std::string Table::getInsertionString() const
+{
+	std::string buffer("");
+	buffer += "INSERT INTO " + this->name + "(";
+
+	for(size_t iC = 0; iC < this->columns.size(); iC++)
+	{
+		buffer += this->columns[iC].getHeader();
+		if(iC + 1 < this->columns.size())
+		{
+			buffer += ",";
+		}
+	}
+
+	buffer += ") VALUES (";
+
+	std::string insertionString("");
+
+	bool flag = true;
+	size_t idX = 0;
+
+	while(flag)
+	{
+		std::string current_values("");
+		for(size_t iC = 0; iC < this->columns.size(); iC++)
+		{
+			Column current = this->columns[iC];
+			if(current[idX] != NULL)
+			{
+				if(this->columns[iC].getType() == "TEXT")
+					current_values += "'";
+				current_values += (*current[idX]);
+				if(this->columns[iC].getType() == "TEXT")
+					current_values += "'";
+				if(iC + 1 < this->columns.size())
+				{
+					current_values += ",";
+				}
+			}
+			else
+			{
+				flag = false;
+			}
+		}
+		if(flag)
+		{
+			idX++;
+			insertionString += buffer + current_values;
+		}
+	}
+	return insertionString;
+}

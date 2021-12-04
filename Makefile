@@ -14,4 +14,7 @@ clean:
 test: bin
 	./bin/program ./example_config.xml
 
+push:
+	git push git@github.com:LollyBomb-hub/project_oop.git
+
 .PHONY: bin

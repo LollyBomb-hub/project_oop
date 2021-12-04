@@ -20,6 +20,7 @@ class Table
 
 	std::string log() const;
 	std::string getCreatingString() const;
+	std::string getInsertionString() const;
 
     private:
 

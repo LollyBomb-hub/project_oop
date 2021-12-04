@@ -22,9 +22,10 @@ class Column
 		Column(std::string, std::string, std::vector<std::string>);
 
 		// Get element by rowNo
-		std::string& operator[](size_t);
+		std::string* operator[](size_t);
 
 		std::string getHeader() const;
+		std::string getType() const;
 		std::string getCreatingString() const;
 
 		// Get length of data

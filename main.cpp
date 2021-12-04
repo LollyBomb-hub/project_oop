@@ -76,6 +76,7 @@ int main(int argc, char** argv)
 
 		pqxx::work work(connection2DB);
 
+		// Creating tables in database
 		for(size_t iT = 0; iT < db.getAllTables().size(); iT++)
 		{
 			std::string sql_query = db[iT]->getCreatingString();
@@ -83,7 +84,15 @@ int main(int argc, char** argv)
 			work.exec(sql_query);
 		}
 
+		// Commiting changes
 		work.commit();
+
+		for(size_t iT = 0; iT < db.getAllTables().size(); iT++)
+		{
+			std::string insertion_sql_query = db[iT]->getInsertionString();
+			work.exec(insertion_sql_query);
+			work.commit();
+		}
 
 		connection2DB.close();
 
