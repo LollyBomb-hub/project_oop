@@ -86,6 +86,8 @@ int main(int argc, char** argv)
 		work.commit();
 
 		connection2DB.close();
+
+		std::cout << "Connection closed!\n\0";
 	}
 	catch(const std::exception &e)
 	{
