@@ -15,9 +15,11 @@ class Table
 
 	Table();
 	Table(std::string);
+
 	void addColumn(Column*);
+
 	std::string log() const;
-	
+	std::string getCreatingString() const;
 
     private:
 

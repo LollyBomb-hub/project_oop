@@ -23,6 +23,7 @@ int main(int argc, char** argv)
 {
 	if(argc < 2)
 		return 0;
+
 	xml_document<> xml_configuration;
 	std::ifstream config_file(argv[1]);
 	std::stringstream buffer;
@@ -59,6 +60,36 @@ int main(int argc, char** argv)
 
 	// Here is just connection to db and fullfilling it with given data
 
-	
+	try
+	{
+		// Open connection to postgresql
+		pqxx::connection connection2DB(db.getConnectionString());
+		if(connection2DB.is_open())
+		{
+			std::cout << "Connected to DATABASE successfully\n\0";
+		}
+		else
+		{
+			std::cerr << "Can't connect to DATABASE\n\0";
+			return 1;
+		}
+
+		pqxx::work work(connection2DB);
+
+		for(size_t iT = 0; iT < db.getAllTables().size(); iT++)
+		{
+			std::string sql_query = db[iT]->getCreatingString();
+			std::cout << "Executing SQL query:\n" << sql_query << '\n';
+			work.exec(sql_query);
+		}
+
+		work.commit();
+
+		connection2DB.close();
+	}
+	catch(const std::exception &e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 	return 0;
 }

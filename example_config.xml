@@ -1,4 +1,4 @@
-<Database username="db_username" password="db_password" accesspoint="localhost:1234">
+<Database username="workspace" password="Q1w2a3S4" accesspoint="localhost:5432/workspace">
 
     <Table name="lessons">
 

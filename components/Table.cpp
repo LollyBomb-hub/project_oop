@@ -58,3 +58,21 @@ std::string Table::log() const
 	log_info += head_buffer + '\n' + buffer + '\n' + head_buffer + '\n';
 	return log_info;
 }
+
+std::string Table::getCreatingString() const
+{
+	std::string creatingString("");
+	creatingString += "CREATE TABLE " + this->name + "(";
+
+	for(size_t iC = 0; iC < this->columns.size(); iC++)
+	{
+		creatingString += this->columns[iC].getCreatingString();
+		if(iC + 1 < this->columns.size())
+		{
+			creatingString += ",";
+		}
+	}
+
+	creatingString += ");";
+	return creatingString;
+}

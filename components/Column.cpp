@@ -38,3 +38,11 @@ std::string Column::getHeader() const
 {
 	return this->header;
 }
+
+std::string Column::getCreatingString() const
+{
+	std::string creatingString("");
+	creatingString += this->header + " ";
+	creatingString += this->type;
+	return creatingString;
+}

@@ -16,6 +16,9 @@ class DataBase
 		bool setPassword(std::string);
 		bool setAccessPoint(std::string);
 
+		Table* operator[](size_t);
+		std::vector<Table> getAllTables() const;
+
 		std::string getUsername() const;
 		std::string getPassword() const;
 		std::string getAccessPoint() const;
@@ -23,6 +26,7 @@ class DataBase
 		void addTable(Table*);
 
 		std::string log() const;
+		std::string getConnectionString() const;
 
 	private:
 

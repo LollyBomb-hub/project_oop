@@ -48,6 +48,21 @@ bool DataBase::setAccessPoint(std::string _access_point)
 }
 
 
+Table* DataBase::operator[](size_t idT)
+{
+	if(idT < this->tables.size())
+		return &this->tables[idT];
+	else
+		return NULL;
+}
+
+
+std::vector<Table> DataBase::getAllTables() const
+{
+	return this->tables;
+}
+
+
 std::string DataBase::getUsername() const
 {
 	return this->username;
@@ -86,4 +101,14 @@ std::string DataBase::log() const
 		log_info += this->tables[iT].log();
 	}
 	return log_info;
+}
+
+std::string DataBase::getConnectionString() const
+{
+	std::string connectionString("postgresql://");
+	connectionString += this->username;
+	if(this->password.length() > 0)
+		connectionString += ":" + this->password;
+	connectionString += "@" + this->access_point;
+	return connectionString;
 }

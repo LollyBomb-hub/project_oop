@@ -25,6 +25,7 @@ class Column
 		std::string& operator[](size_t);
 
 		std::string getHeader() const;
+		std::string getCreatingString() const;
 
 		// Get length of data
 		size_t length() const;
