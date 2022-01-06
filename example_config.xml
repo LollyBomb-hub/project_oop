@@ -1,9 +1,0 @@
-<Database username="workspace" password="Q1w2a3S4" accesspoint="localhost:5432/workspace" source="data.xlsx">
-    <Table name="lessons" isIdProvided="False">
-        <Column name="c_name" type="TEXT" ws="users">A1:A6</Column>
-        <Column name="c_surname" type="TEXT" ws="users">B1:B6</Column>
-        <Column name="c_lastname" type="TEXT" ws="users">C1:C6</Column>
-	<Column name="c_average_100_mark" type="INT" ws="users">D1:D6</Column>
-	<Column name="c_mark_from_OGE" type="INT" ws="Дополнительная информация">A1:A6</Column>
-    </Table>
-</Database>
