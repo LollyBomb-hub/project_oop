@@ -1,0 +1,3 @@
+[submodule "external/OpenXLSX"]
+	path = external/OpenXLSX
+	url = git@github.com:troldal/OpenXLSX.git
