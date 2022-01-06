@@ -4,3 +4,6 @@
 [submodule "external/rapidxml"]
 	path = external/rapidxml
 	url = git@github.com:timniederhausen/rapidxml.git
+[submodule "external/pqxx"]
+	path = external/pqxx
+	url = git@github.com:jtv/libpqxx.git
