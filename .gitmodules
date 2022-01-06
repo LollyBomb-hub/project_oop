@@ -1,3 +1,6 @@
 [submodule "external/OpenXLSX"]
 	path = external/OpenXLSX
 	url = git@github.com:troldal/OpenXLSX.git
+[submodule "external/rapidxml"]
+	path = external/rapidxml
+	url = git@github.com:timniederhausen/rapidxml.git
