@@ -1,7 +1,7 @@
 CXXFLAGS := -Ofast -s
-CXXFLAGS += -Wall -Wextra -Wpedantic -Werror
-LINK = -lpqxx -lpq
-INCLUDES = -L/usr/local/lib
+CXXFLAGS += -Wall -Wextra -Wpedantic -Werror -Wno-unknown-pragmas
+LINK = -lpqxx -lpq ./external/OpenXLSX/output/libOpenXLSX.a
+INCLUDES = -L/usr/local/lib -L./external/OpenXLSX/output -I./external/OpenXLSX/OpenXLSX -I./external/OpenXLSX/OpenXLSX/headers -I./external/rapidxml
 
 all: bin test
 
@@ -12,7 +12,7 @@ clean:
 	rm bin/program
 
 test: bin
-	./bin/program ./example_config.xml
+	./bin/program ./example_config.xml ./data.xlsx
 
 push:
 	git push git@github.com:LollyBomb-hub/project_oop.git

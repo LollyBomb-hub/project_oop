@@ -4,8 +4,10 @@
 
 #include <pqxx/pqxx>
 
-#include "rapidxml/rapidxml.hpp"
-#include "rapidxml/rapidxml_print.hpp"
+#include "external/rapidxml/rapidxml.hpp"
+#include "external/rapidxml/rapidxml_print.hpp"
+
+#include "external/OpenXLSX/OpenXLSX/OpenXLSX.hpp"
 
 #include "components/include/DataBase"
 #include "components/include/Table"
@@ -14,6 +16,7 @@
 
 #define getProperty(node, prop) node->first_attribute(prop)->value()
 
+using namespace OpenXLSX;
 
 using rapidxml::xml_document;
 using rapidxml::xml_node;
@@ -21,8 +24,11 @@ using rapidxml::xml_node;
 
 int main(int argc, char** argv)
 {
-	if(argc < 2)
+	if(argc < 3)
 		return 0;
+
+	XLDocument xlsxFile;
+	xlsxFile.open(argv[2]);
 
 	xml_document<> xml_configuration;
 	std::ifstream config_file(argv[1]);
@@ -46,7 +52,8 @@ int main(int argc, char** argv)
 		// Cycle {1}
 		for(xml_node<> *columnNode = tableNode->first_node("Column"); columnNode; columnNode = columnNode->next_sibling())
 		{
-			Column *currentColumn = new Column(getProperty(columnNode, "name"), getProperty(columnNode, "type"));
+			Column *currentColumn = new Column(getProperty(columnNode, "name"), getProperty(columnNode, "type"), getProperty(columnNode, "ws"), columnNode->value());
+			currentColumn->readSource(xlsxFile);
 			currentTable->addColumn(currentColumn);
 		}
 		db.addTable(currentTable);
@@ -64,6 +71,7 @@ int main(int argc, char** argv)
 	{
 		// Open connection to postgresql
 		pqxx::connection connection2DB(db.getConnectionString());
+
 		if(connection2DB.is_open())
 		{
 			std::cout << "Connected to DATABASE successfully\n\0";
@@ -84,15 +92,16 @@ int main(int argc, char** argv)
 			work.exec(sql_query);
 		}
 
-		// Commiting changes
-		work.commit();
+		std::cout << "All tables created successfully!\n";
 
 		for(size_t iT = 0; iT < db.getAllTables().size(); iT++)
 		{
 			std::string insertion_sql_query = db[iT]->getInsertionString();
+			std::cout << "Executing SQL query:\n" << insertion_sql_query << '\n';
 			work.exec(insertion_sql_query);
-			work.commit();
 		}
+
+		work.commit();
 
 		connection2DB.close();
 
