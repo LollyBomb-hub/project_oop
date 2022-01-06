@@ -92,16 +92,18 @@ std::string Table::getInsertionString() const
 		}
 	}
 
-	buffer += ") VALUES (";
+	buffer += ") VALUES ";
 
 	std::string insertionString("");
+
+	insertionString += buffer;
 
 	bool flag = true;
 	size_t idX = 0;
 
 	while(flag)
 	{
-		std::string current_values("");
+		std::string current_values("(");
 		for(size_t iC = 0; iC < this->columns.size(); iC++)
 		{
 			Column current = this->columns[iC];
@@ -125,8 +127,11 @@ std::string Table::getInsertionString() const
 		if(flag)
 		{
 			idX++;
-			insertionString += buffer + current_values;
+			insertionString += current_values + "),";
 		}
 	}
+
+	insertionString.pop_back();
+
 	return insertionString;
 }

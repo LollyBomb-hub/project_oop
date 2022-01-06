@@ -12,7 +12,7 @@ clean:
 	rm bin/program
 
 test: bin
-	./bin/program ./example_config.xml ./data.xlsx
+	./bin/program ./tests/example_config.xml ./tests/data.xlsx
 
 push:
 	git push git@github.com:LollyBomb-hub/project_oop.git

@@ -7,6 +7,12 @@
 #include <vector>
 
 
+#include <OpenXLSX.hpp>
+
+
+using namespace OpenXLSX;
+
+
 class Column
 {
 
@@ -16,10 +22,10 @@ class Column
 		Column(std::string);
 		// Header and type args constructor
 		Column(std::string, std::string);
-		// Header, type and source constructor
+		// Header, type and ws constructor
 		Column(std::string, std::string, std::string);
 		// All args constructor
-		Column(std::string, std::string, std::vector<std::string>);
+		Column(std::string, std::string, std::string, std::string);
 
 		// Get element by rowNo
 		std::string* operator[](size_t);
@@ -28,6 +34,8 @@ class Column
 		std::string getType() const;
 		std::string getCreatingString() const;
 
+		void readSource(XLDocument&);
+
 		// Get length of data
 		size_t length() const;
 
@@ -35,6 +43,7 @@ class Column
 
 		std::string header;
 		std::string type;
+		std::string ws;
 		std::string source;
 		std::vector<std::string> values;
 
