@@ -1,3 +1,4 @@
 program/
 *.swp
 .vscode/
+*.xlsx#
