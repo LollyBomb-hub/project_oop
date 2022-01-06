@@ -5,10 +5,6 @@ INCLUDES = -L/usr/local/lib -L./external/OpenXLSX/output -I./external/OpenXLSX/O
 
 all: bin test
 
-OpenXLSX:
-	cmake ./external/OpenXLSX
-	$(MAKE) -C ./external/OpenXLSX
-
 bin:
 	g++ -std=c++17 $(CXXFLAGS) $(INCLUDES) *.cpp components/*.cpp $(LINK) -o bin/program
 
